@@ -9,10 +9,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.Set;
 
 public class HP_career_stepDef {
 
-
+    Select select ;
     HP_career career = new HP_career();
     HP_pages hp = new HP_pages();
     @Given("user goes to {string}")
@@ -67,13 +70,27 @@ public class HP_career_stepDef {
     public void user_applies_first_job() {
         BrowserUtils.scrollToElement(career.firstJob);
         career.firstJob.click();
+        // Mevcut pencerenin handle'ını alın
+        String anaPencereHandle = Driver.getDriver().getWindowHandle();
+
+// Yeni pencerenin handle'ını almak için tüm handle'ları alın
+        Set<String> pencereHandleSet = Driver.getDriver().getWindowHandles();
+
+// Ana pencere dışındaki handle'ı bulun
+        for (String handle : pencereHandleSet) {
+            if (!handle.equals(anaPencereHandle)) {
+                Driver.getDriver().switchTo().window(handle);
+                break;
+            }
+        }
+        career.acceptAll.click();
+
+
     }
     @Then("user sees I'm interested text")
     public void user_sees_i_m_interested_text() {
 
-        Driver.getDriver().switchTo().frame(0);
-        career.acceptAll.click();
-        Driver.getDriver().switchTo().parentFrame();
+
         Assert.assertTrue("I'm interested" , true);
     }
     @Then("user clicks on I'm interested button")
@@ -85,53 +102,64 @@ public class HP_career_stepDef {
     @Then("user enters {string} {string} {string} {string}")
     public void user_enters(String firstName, String lastName, String id_email, String phoneNumber) {
 
-
+      career.firstName.click();
       career.firstName.sendKeys(firstName);
+      career.lastName.click();
       career.lastName.sendKeys(lastName);
+      career.id_email.click();
       career.id_email.sendKeys(id_email);
+      career.phoneNumber.click();
       career.phoneNumber.sendKeys(phoneNumber);
+      BrowserUtils.scrollToElement(career.message);
 
     }
     @Then("user chooses an open to relocate radio button")
     public void user_chooses_an_open_to_relocate_radio_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        career.relocateRadioBtn.click();
     }
     @Then("user writes in the Currently based inbox")
     public void user_writes_in_the_currently_based_inbox() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        career.currentLocation.sendKeys("Lund");
     }
     @Then("user clicks on any Have you ever worked in an Industrial Environment with Software? buttons")
     public void user_clicks_on_any_have_you_ever_worked_in_an_industrial_environment_with_software_buttons() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        career.industrialExperinceRBtn.click();
     }
     @Then("user writes anything in Which detail made you the most excited about the job ad? inbox")
     public void user_writes_anything_in_which_detail_made_you_the_most_excited_about_the_job_ad_inbox() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        career.excitedAbout.click();
+        career.excitedAbout.sendKeys("Everything");
+        BrowserUtils.scrollToElement(career.dropdown);
     }
     @Then("user chooses an How did you hear about Northvolt? option")
     public void user_chooses_an_how_did_you_hear_about_northvolt_option() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+        new Select(career.dropdown).selectByIndex(4);
     }
     @Then("user chooses a gender")
     public void user_chooses_a_gender() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+         career.gender.click();
     }
     @Then("user clicks on confirm checkbox")
     public void user_clicks_on_confirm_checkbox() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        career.terms.click();
     }
     @Then("user clicks on submit button")
     public void user_clicks_on_submit_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+       career.submit.click();
     }
 
 
+    @And("user uploads CV")
+    public void userUploadsCV() {
+
+        career.cv.sendKeys(System.getProperty("user.dir") + "//src//test//resources//files//pdf//NevaSevgiCV.pdf");
+    }
+
+    @And("user verifies {string} message displayed")
+    public void userVerifiesMessageDisplayed(String message) {
+
+        Assert.assertTrue(career.thankYou.isDisplayed());
+
+    }
 }

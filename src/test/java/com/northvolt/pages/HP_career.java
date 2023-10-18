@@ -53,5 +53,39 @@ public class HP_career {
     @FindBy(xpath = "//*[@class='cc_btn cc_btn-primary']")
     public WebElement acceptAll;
 
+   @FindBy (id="id_cv")
+    public WebElement cv;
+
+   @FindBy (id="id_message")
+    public WebElement message;
+
+   @FindBy (id = "id_job_question_362804_1_0")
+    public WebElement relocateRadioBtn;
+
+   @FindBy (id ="id_job_question_362806_3")
+    public WebElement currentLocation;
+
+   @FindBy (id = "id_job_question_365758_4_0")
+    public WebElement industrialExperinceRBtn;
+
+    @FindBy (id ="id_job_question_365759_5")
+    public WebElement excitedAbout;
+
+    @FindBy (id = "id_company_question_448_14")
+    public WebElement dropdown;
+
+    @FindBy (id ="id_company_question_33472_15_1")
+    public WebElement gender;
+
+    @FindBy (id ="id_terms")
+    public WebElement terms;
+
+    @FindBy (id ="submit-id-submit")
+    public WebElement submit;
+
+    @FindBy (xpath = "//*[.='Thank you for your application!']")
+    public WebElement thankYou;
+
+
 
 }
