@@ -65,19 +65,27 @@ public class HP_career_stepDef {
     }
     @Then("user applies first job")
     public void user_applies_first_job() {
+        BrowserUtils.scrollToElement(career.firstJob);
         career.firstJob.click();
     }
     @Then("user sees I'm interested text")
     public void user_sees_i_m_interested_text() {
+
+        Driver.getDriver().switchTo().frame(0);
+        career.acceptAll.click();
+        Driver.getDriver().switchTo().parentFrame();
         Assert.assertTrue("I'm interested" , true);
     }
     @Then("user clicks on I'm interested button")
     public void user_clicks_on_i_m_interested_button() {
+
+
         career.iAmInterested.click();
     }
     @Then("user enters {string} {string} {string} {string}")
     public void user_enters(String firstName, String lastName, String id_email, String phoneNumber) {
-      Driver.getDriver().getWindowHandle();
+
+
       career.firstName.sendKeys(firstName);
       career.lastName.sendKeys(lastName);
       career.id_email.sendKeys(id_email);

@@ -23,10 +23,10 @@ public class HP_career {
     @FindBy (xpath = "//*[.='Available roles']")
     public WebElement avaibleRoles;
 
-    @FindBy (xpath = "//*[@id='cbx-department-10']")
+    @FindBy (xpath = "(//*[@class='c-departmentFilter__checkbox'])[11]")
     public WebElement softwareCheckBox;
 
-    @FindBy (xpath = "//*[@id='cbx-location-6']")
+    @FindBy (xpath = "(//*[@class='c-locationFilter__checkbox'])[7]")
     public WebElement skellefteaCheckBox;
 
     @FindBy (id="inp")
@@ -35,7 +35,7 @@ public class HP_career {
     @FindBy (xpath = "//*[@class='c-departmentJobs__list']/li[1]")
     public WebElement firstJob;
 
-    @FindBy (xpath = "(//*[@class='placeholder'])[1]")
+    @FindBy (xpath = "(//*[@class='btn btn-huge btn-success btn-embossed btn-block mbl'])")
     public WebElement iAmInterested;
 
     @FindBy (id = "id_first_name")
@@ -49,6 +49,9 @@ public class HP_career {
 
     @FindBy (xpath = "//*[@data-target-id=\"id_phone_number\"]")
     public WebElement phoneNumber;
+
+    @FindBy(xpath = "//*[@class='cc_btn cc_btn-primary']")
+    public WebElement acceptAll;
 
 
 }

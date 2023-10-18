@@ -69,6 +69,6 @@ public class BrowserUtils {
     }
     public static void scrollToElement(WebElement element) {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        BrowserUtils.sleep(10);
+        BrowserUtils.sleep(3);
     }
 }
